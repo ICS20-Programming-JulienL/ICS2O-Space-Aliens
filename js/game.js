@@ -7,10 +7,11 @@
 // Created on: May 30 2023
 // This file contains the JS functions to display components of the game, ICS2O-Space-Aliens
 
+// import scenes
 import SplashScene from './splashScene.js'
 import TitleScene from './titleScene.js'
 
-// declare variable for game scene
+// declare variable for game scenes
 const splashScene = new SplashScene()
 const titleScene = new TitleScene()
 
@@ -19,14 +20,14 @@ const config = {
   type: Phaser.AUTO,
   width: 1920,
   height: 1080,
-  physics : {
-    default : "arcade",
+  physics: {
+    default: 'arcade',
     arcade: {
       debug: true,
     },
   },
   // set the color of the background
-  backgroundColor: 0xffffff,
+  backgroundColor: 0x5f6e7a,
   scale: {
     mode: Phaser.Scale.FIT,
     // center background scene
@@ -43,4 +44,3 @@ game.scene.add('titleScene', titleScene)
 
 // title for the start
 game.scene.start('splashScene')
-game.scene.start('titleScene')
