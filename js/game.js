@@ -35,6 +35,7 @@ const config = {
   },
 }
 
+// define game
 const game = new Phaser.Game(config)
 
 // display scenes
