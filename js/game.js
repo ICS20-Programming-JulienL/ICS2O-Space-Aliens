@@ -26,7 +26,7 @@ const config = {
     },
   },
   // set the color of the background
-  backgroundColor: 0x5f8e7a,
+  backgroundColor: 0xffffff,
   scale: {
     mode: Phaser.Scale.FIT,
     // center background scene
@@ -37,10 +37,10 @@ const config = {
 const game = new Phaser.Game(config)
 
 // display scenes
-game.scene.add("splashScene", splashScene)
-game.scene.add("titleScene", titleScene)
+game.scene.add('splashScene', splashScene)
+game.scene.add('titleScene', titleScene)
 
 
 // title for the start
-game.scene.start("splashScene")
-game.scene.start("titleScene")
+game.scene.start('splashScene')
+game.scene.start('titleScene')
