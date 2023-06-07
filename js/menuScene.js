@@ -25,7 +25,7 @@ class MenuScene extends Phaser.Scene {
   // console log the title scene, and load the star button and menu background images
   preload () {
     console.log('Menu Scene')
-    this.load.image('menuSceneBackground', './assets/stormtrooper_splash_scene_2.png')
+    this.load.image('menuSceneBackground', './assets/stormtrooper_menu_scene.png')
     this.load.image('startButton', './assets/start.png')
   }
 

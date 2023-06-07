@@ -12,6 +12,7 @@ class TitleScene extends Phaser.Scene {
   constructor () {
     super({ key: 'titleScene' })
 
+    // set the title scene background, text, and styling to null
     this.titleSceneBackgroundImage= null
     this.titleSceneText= null
     this.titleSceneTextStyle = { font: "200px times", fill: "#fde4b9", align: "center"}
@@ -22,7 +23,7 @@ class TitleScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('#ffffff')
   }
 
-  // console log the title scene
+  // console log the title scene and load the image
   preload () {
     console.log('Title Scene')
     this.load.image('titleSceneBackground', './assets/stormtrooper_splash_scene.PNG')
@@ -39,6 +40,7 @@ class TitleScene extends Phaser.Scene {
     this.titleSceneBackground.x = 1920 / 2
     this.titleSceneBackground.y = 1080 / 2
 
+    // add text for title scene
     this.titleSceneText = this.add.text (
       1920/2,
       (1080/2)+350,
@@ -47,6 +49,7 @@ class TitleScene extends Phaser.Scene {
     ).setOrigin(0.5)
   }
 
+  // if more than 6 seconds has passed, switch the scene to the menu scene
   update (time, delta) {
     if (time > 6000) {
       this.scene.switch('menuScene') 

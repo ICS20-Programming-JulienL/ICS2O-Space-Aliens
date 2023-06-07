@@ -30,8 +30,8 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images for game scene
-    this.load.image("starWarsBackground", "./assets/starWarsBackground.jpg")
-    this.load.image("ship", "/assets/stormtrooper.png")
+    this.load.image("starWarsBackground", "./assets/gameSceneBackground.jpg")
+    this.load.image("ship", "/assets/stormtrooper1.png")
     this.load.image("missile", "./assets/laser_beam1.png")
   }
 
