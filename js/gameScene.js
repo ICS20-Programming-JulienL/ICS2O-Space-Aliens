@@ -30,7 +30,7 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images for game scene
-    this.load.image("starWarsBackground", "./assets/gameSceneBackground.jpg")
+    this.load.image("gameSceneBackground", "./assets/gameSceneBackground.jpg")
     this.load.image("ship", "/assets/stormtrooper1.png")
     this.load.image("missile", "./assets/laser_beam1.png")
   }
@@ -41,7 +41,7 @@ class GameScene extends Phaser.Scene {
     this.gameSceneBackground = this.add.sprite (
       0,
       0, 
-      'starWarsBackground'
+      'gameSceneBackground'
     ).setScale(3.75)
     
     // center the image
