@@ -50,7 +50,6 @@ class MenuScene extends Phaser.Scene {
     this.startButton.on("pointerdown", () => this.clickButton())
   }
 
-  
   update (time, delta) {
     // pass
   }
