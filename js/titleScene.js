@@ -12,7 +12,7 @@ class TitleScene extends Phaser.Scene {
   constructor () {
     super({ key: 'titleScene' })
 
-    // set the title scene background, text, and styling to null
+    // set the title scene background and text to null
     this.titleSceneBackgroundImage= null
     this.titleSceneText= null
 
