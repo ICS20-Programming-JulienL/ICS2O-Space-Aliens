@@ -11,15 +11,20 @@
 import SplashScene from './splashScene.js'
 import TitleScene from './titleScene.js'
 import MenuScene from './menuScene.js'
+import IntructionsScene from './instructionsScene.js'
 import GameScene from './gameScene.js'
 import WinScene from './winScene.js'
+import LoseScene from './loseScene.js'
 
 // declare variable for game scenes
 const splashScene = new SplashScene()
 const titleScene = new TitleScene()
 const menuScene = new MenuScene()
 const gameScene = new GameScene()
+const instructionsScene = new IntructionsScene()
 const winScene = new WinScene()
+const loseScene = new LoseScene()
+
 
 //* Setup for game scene*/
 const config = {
@@ -50,6 +55,8 @@ game.scene.add('titleScene', titleScene)
 game.scene.add('menuScene', menuScene)
 game.scene.add('gameScene', gameScene)
 game.scene.add('winScene', winScene)
+game.scene.add('instructionsScene', instructionsScene)
+game.scene.add('loseScene', loseScene)
 
 // title for the start
 game.scene.start('splashScene')

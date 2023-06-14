@@ -9,7 +9,7 @@
 
 // extend the game scene into the phaser library
 class GameScene extends Phaser.Scene {
-
+  
   // create an enemy
   createEnemy () {
 
@@ -78,6 +78,10 @@ class GameScene extends Phaser.Scene {
 
   create (data) {
 
+    this.menuSceneMusic = this.sound.add('menu_music')
+    this.menuSceneMusic.loop = true
+    this.menuSceneMusic.play()
+  
     // sprite for background
     this.gameSceneBackground = this.add.sprite (
       0,
@@ -114,7 +118,7 @@ class GameScene extends Phaser.Scene {
       this.sound.play("explosion")
 
       // add one point to the score
-      this.score = this.score+1
+      this.score = this.score+5
       this.scoreText.setText("Score: " + this.score.toString())
 
       // create two new enemies
@@ -130,12 +134,8 @@ class GameScene extends Phaser.Scene {
       // play the explosion and death sound effect
       this.sound.play("death_sound")
 
-      // display the game over text
-      this.gameOverText = this.add.text(1920/2, 1080/2, "Game Over! \n Click to play again!", this.gameOverTextStyle).setOrigin(0.5)
-      this.gameOverText.setInteractive({userHandCursor : true})
-
-      // reset the game scene
-      this.gameOverText .on("pointerdown", () => this.scene.start("gameScene"))
+      this.scene.start("loseScene")
+       
       this.missileFire == false
        
       // set the score back to zero
@@ -150,7 +150,7 @@ class GameScene extends Phaser.Scene {
   update (time, delta) {
     // called 60 times a second
 
-    if (time % 5 == 0) {
+    if (time % 9 == 0) {
       this.createEnemy()
     }
 
@@ -169,12 +169,12 @@ class GameScene extends Phaser.Scene {
       // if the ship is at x point less than 0, then set it back to x point 0
       if (this.ship.x < 0) {
         this.ship.x = 1920
-        missileFire == true
       }
     }
 
-    if (this.score > 5) {
+    if (this.score >= 5) {
       this.scene.start("winScene")
+      this.score = 0
       this.missileFire == false
     }
 

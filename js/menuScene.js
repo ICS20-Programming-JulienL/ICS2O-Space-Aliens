@@ -55,10 +55,10 @@ class MenuScene extends Phaser.Scene {
     this.instructionsButton = this.add.sprite(1920/2, (1080/2)+100, "instructionsButton") 
 
     //make the start button interactive, and when clicked, call the clickButton() function
-    this.startButton.setInteractive({ useHandCusor : true})
+    this.startButton.setInteractive({ useHandCursor : true})
     this.startButton.on("pointerdown", () => this.clickStart())
 
-    this.instructionsButton.setInteractive({ useHandCusor : true})
+    this.instructionsButton.setInteractive({ useHandCursor : true})
     this.instructionsButton.on("pointerdown", () => this.clickInstructions())
 
   }
@@ -74,7 +74,8 @@ class MenuScene extends Phaser.Scene {
   }
 
   clickInstructions () {
-    this.scene.start("instructionsScene.js")
+    this.scene.start("instructionsScene")
+        this.menuSceneMusic.pause()
   }
 }
 

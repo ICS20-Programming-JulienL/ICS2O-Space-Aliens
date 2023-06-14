@@ -8,16 +8,18 @@
 // This file contains the JS functions for the title scenes, ICS2O-Space-Aliens
 
 // extend the title scene into the phaser library
-class TitleScene extends Phaser.Scene {
+class WinScene extends Phaser.Scene {
   constructor () {
     super({ key: 'winScene' })
 
     // set the title scene background and text to null
-    this.titleSceneBackgroundImage= null
-    this.titleSceneText= null
+    this.winSceneBackground= null
+    this.winSceneText= null
+    this.menuButton = null
+
 
   // create styling for text
-    this.titleSceneTextStyle = { font: "200px times", fill: "#000000", align: "center"}
+    this.winSceneTextStyle = { font: "200px times", fill: "#000000", align: "center"}
   }
 
   // initialize the background color
@@ -29,32 +31,65 @@ class TitleScene extends Phaser.Scene {
   preload () {
     console.log('Win Scene')
     this.load.image('winSceneBackground', './assets/winSceneBackground.jpg')
+    this.load.image('menuButton', './assets/menuButton.png')  
+    this.load.image('retryButton', './assets/retryButton.png')  
+
   }
 
   create (data) {
+    
       //turn the background image into a sprite
-    this.titleSceneBackground = this.add.sprite (
+    this.winSceneBackground = this.add.sprite (
       0,
       0, 
       'winSceneBackground'
     ).setScale(2.75)
     // center the image
-    this.titleSceneBackground.x = 1920 / 2
-    this.titleSceneBackground.y = 1080 / 2
+    this.winSceneBackground.x = 1920 / 2
+    this.winSceneBackground.y = 1080 / 2
 
     // add text for title scene
-    this.titleSceneText = this.add.text (
+    this.winSceneText = this.add.text (
       1920/2,
-      (1080/2)-350,
+      -250,
       "You Win!",
-      this.titleSceneTextStyle
+      this.winSceneTextStyle
     ).setOrigin(0.5)
+
+ // add the sprite for the start button
+    this.menuButton = this.add.sprite(1920/2, (1080/2) - 50, "menuButton") 
+    this.retryButton = this.add.sprite((1920/2)+20, (1080/2) + 120, "retryButton") 
+
+    //make the start button interactive, and when clicked, call the clickButton() function
+    this.menuButton.setInteractive({ useHandCursor : true})
+    this.menuButton.on("pointerdown", () => this.clickMenu())
+
+    this.retryButton.setInteractive({ useHandCursor : true})
+    this.retryButton.on("pointerdown", () => this.clickRetry())
+
+    this.tweens.add({
+    targets: this.winSceneText, //your image that must spin
+     y: (1080/2)-350,
+    ease: 'Linear',       
+    duration: 2000,
+    repeat: 0,       
+    yoyo: false,
+    rotation: 12.5, //rotation value must be radian
+    duration: 2000 //duration is in milliseconds
+      })
   }
 
-  // if more than 6 seconds has passed, switch the scene to the menu scene
   update (time, delta) {
+  }
+   
+  clickMenu() {
+    this.scene.start("menuScene")
+  }
+
+  clickRetry() {
+    this.scene.start("gameScene")
   }
 }
 
 // export the title scene
-export default TitleScene
+export default WinScene
