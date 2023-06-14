@@ -15,8 +15,10 @@ class MenuScene extends Phaser.Scene {
     // assign the background image and start button to null
     this.menuSceneBackgroundImage= null
     this.startButton = null
+    this.menuSceneMusic = null
   }
 
+  
   // initialize the background color
   init(data) {
     this.cameras.main.setBackgroundColor('#ffffff')
@@ -27,10 +29,16 @@ class MenuScene extends Phaser.Scene {
     console.log('Menu Scene')
     this.load.image('menuSceneBackground', './assets/stormtrooper_menu_scene.png')
     this.load.image('startButton', './assets/start.png')
+    this.load.image('instructionsButton', './assets/instructionsButton.png')  
+    this.load.audio('menu_music', './assets/menu_music.mp3')
   }
 
   create (data) {
-
+ 
+    this.menuSceneMusic = this.sound.add('menu_music')
+    this.menuSceneMusic.loop = true
+    this.menuSceneMusic.play()
+  
     // add the sprite for the menu background
     this.menuSceneBackground = this.add.sprite (
       0,
@@ -43,19 +51,30 @@ class MenuScene extends Phaser.Scene {
     this.menuSceneBackground.y = 1080 / 2
 
     // add the sprite for the start button
-    this.startButton = this.add.sprite(1920/2, (1080/2) + 100, "startButton") 
+    this.startButton = this.add.sprite(1920/2, (1080/2) - 50, "startButton") 
+    this.instructionsButton = this.add.sprite(1920/2, (1080/2)+100, "instructionsButton") 
 
     //make the start button interactive, and when clicked, call the clickButton() function
     this.startButton.setInteractive({ useHandCusor : true})
-    this.startButton.on("pointerdown", () => this.clickButton())
+    this.startButton.on("pointerdown", () => this.clickStart())
+
+    this.instructionsButton.setInteractive({ useHandCusor : true})
+    this.instructionsButton.on("pointerdown", () => this.clickInstructions())
+
   }
 
   update (time, delta) {
     // pass
+
   }
 
-  clickButton() {
+  clickStart() {
     this.scene.start("gameScene")
+    this.menuSceneMusic.pause()
+  }
+
+  clickInstructions () {
+    this.scene.start("instructionsScene.js")
   }
 }
 

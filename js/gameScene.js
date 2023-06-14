@@ -40,6 +40,10 @@ class GameScene extends Phaser.Scene {
     this.score = 0
     this.scoreText = null
 
+    this.highScore = 0
+    this.highScoreText = null
+
+    this.highScoreTextStyle = { font: "65px Arial", fill: "#ffffff", align: "center" } 
     // assign the score text styling variable to the intended styling.
     this.scoreTextStyle = { font: "65px Arial", fill: "#ffffff", align: "center" } 
 
@@ -67,7 +71,7 @@ class GameScene extends Phaser.Scene {
 
     //load sound for game scene
     this.load.audio("laser", "./assets/laser1.wav")
-    this.load.audio("death_sound_enemy", "./assets/death_sound_enemy.mp3")
+    this.load.audio("death_sound", "./assets/death_sound.mp3")
     this.load.audio("explosion", "./assets/barrelExploding.wav")
 
   }
@@ -86,6 +90,8 @@ class GameScene extends Phaser.Scene {
 
     // add the score text
     this.scoreText = this.add.text(10, 10, "Score :" + this.score.toString(), this.scoreTextStyle)
+    this.highScoreText = this.add.text(10, 75, "High Score :" + this.highScore.toString(), this.highScoreTextStyle)
+    
     
     // sprite for ship
     this.ship = this.physics.add.sprite(1920/2, 1080-100, "ship")
@@ -105,7 +111,6 @@ class GameScene extends Phaser.Scene {
       missileCollide.destroy()
 
       // play the death and explosion sound effect
-      this.sound.play("death_sound_enemy")
       this.sound.play("explosion")
 
       // add one point to the score
@@ -113,7 +118,6 @@ class GameScene extends Phaser.Scene {
       this.scoreText.setText("Score: " + this.score.toString())
 
       // create two new enemies
-      this.createEnemy()
       this.createEnemy()
     }.bind(this)) 
 
@@ -124,25 +128,34 @@ class GameScene extends Phaser.Scene {
       shipCollide.destroy()
 
       // play the explosion and death sound effect
-      this.sound.play("death_sound_enemy")
-      this.sound.play("explosion")
+      this.sound.play("death_sound")
 
-      // display the game oveer text
+      // display the game over text
       this.gameOverText = this.add.text(1920/2, 1080/2, "Game Over! \n Click to play again!", this.gameOverTextStyle).setOrigin(0.5)
       this.gameOverText.setInteractive({userHandCursor : true})
 
       // reset the game scene
       this.gameOverText .on("pointerdown", () => this.scene.start("gameScene"))
-
+      this.missileFire == false
+       
       // set the score back to zero
+    if (this.score >= this.highScore) {
+      this.highScore = this.score
+      this.highScoreText.setText("High Score: " + this.highScore.toString())
       this.score = 0
+    }
     }.bind(this)) 
   }
 
   update (time, delta) {
     // called 60 times a second
 
+    if (time % 5 == 0) {
+      this.createEnemy()
+    }
+
     // assign the right arrow key, left arrow key, A key, D key, and space bar to a respective variable.
+    
     const keyAObj = this.input.keyboard.addKey("A")
     const keyDObj = this.input.keyboard.addKey("D")    
     const keyLeftObj = this.input.keyboard.addKey("LEFT")
@@ -156,7 +169,13 @@ class GameScene extends Phaser.Scene {
       // if the ship is at x point less than 0, then set it back to x point 0
       if (this.ship.x < 0) {
         this.ship.x = 1920
+        missileFire == true
       }
+    }
+
+    if (this.score > 5) {
+      this.scene.start("winScene")
+      this.missileFire == false
     }
 
     // if the right arrow key is pressed 
