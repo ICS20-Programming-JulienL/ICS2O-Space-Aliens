@@ -113,8 +113,8 @@ class GameScene extends Phaser.Scene {
       // play the explosion sound effect
       this.sound.play("explosion")
 
-      // add 5 points to the score
-      this.score = this.score+5
+      // add 1 point to the score
+      this.score = this.score+1
       this.scoreText.setText("Score: " + this.score.toString())
 
       // create two new enemies
@@ -159,8 +159,8 @@ class GameScene extends Phaser.Scene {
     const keyRightObj = this.input.keyboard.addKey("RIGHT")
     const keySpaceObj = this.input.keyboard.addKey("SPACE")
     
-    // if the score is equal or greater than 50, then...
-    if (this.score >= 50) {
+    // if the score is equal or greater than 5, then...
+    if (this.score >= 5) {
       //pause game scene music 
       this.gameSceneMusic.pause()
 

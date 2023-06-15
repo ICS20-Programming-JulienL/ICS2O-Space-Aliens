@@ -74,7 +74,7 @@ class InstructionsScene extends Phaser.Scene {
     this.instructionsSceneText = this.add.text (
       1920/2,
       (1080/2)+350,
-      "You have lost your squad of stormtroopers, and are now \n being invaded by TIE fighters.  Shoot them down for 5 points each \n using the space bar, and evade their attacks using the arrow or A and D keys. \n If you get hit, you lose, but if you get a score of 50, you live to see another day.",
+      "You have lost your squad of stormtroopers, and are now \n being invaded by TIE fighters.  Shoot them down for 1 point each \n using the spacebar, and evade their attacks using the arrow or A and D keys. \n If you get hit, you lose, but if you get a score of 5, you live to see another day.",
       this.instructionsSceneTextStyle
     ).setOrigin(0.5)
     
