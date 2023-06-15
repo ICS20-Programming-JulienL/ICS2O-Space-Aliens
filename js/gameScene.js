@@ -68,7 +68,7 @@ class GameScene extends Phaser.Scene {
     //load sound effects and music for game scene
     this.load.audio("laser", "./assets/laser.mp3")
     this.load.audio("death_sound", "./assets/death_sound.mp3")
-    this.load.audio("explosion", "./assets/barrelExploding.wav")
+    this.load.audio("explosion", "./assets/explosion.wav")
     this.load.audio("game_music", "./assets/game_music.mp3")
 
   }
@@ -94,7 +94,7 @@ class GameScene extends Phaser.Scene {
     this.scoreText = this.add.text(10, 10, "Score: " + this.score.toString(), this.scoreTextStyle)
     
     // sprite for ship
-    this.ship = this.physics.add.sprite(1920/2, 1080-100, "ship")
+    this.ship = this.physics.add.sprite(1920/2, 1080-100, "ship").setScale(0.2)
 
     // create a group for the missiles
     this.missileGroup = this.physics.add.group()
