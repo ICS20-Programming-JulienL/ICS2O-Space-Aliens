@@ -5,14 +5,15 @@
 // Created by: Mr. Coxall
 // Edited by : Julien Lamoureux
 // Created on: May 30 2023
+// Finished on : June 14 2023
 // This file contains the JS functions to display components of the game, ICS2O-Space-Aliens
 
 // import scenes
 import SplashScene from './splashScene.js'
 import TitleScene from './titleScene.js'
 import MenuScene from './menuScene.js'
-import IntructionsScene from './instructionsScene.js'
 import GameScene from './gameScene.js'
+import IntructionsScene from './instructionsScene.js'
 import WinScene from './winScene.js'
 import LoseScene from './loseScene.js'
 

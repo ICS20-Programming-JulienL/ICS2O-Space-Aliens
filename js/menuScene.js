@@ -24,21 +24,26 @@ class MenuScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('#ffffff')
   }
 
-  // console log the title scene, and load the star button and menu background images
   preload () {
+    // console log the menu scene
     console.log('Menu Scene')
+
+    // load the images
     this.load.image('menuSceneBackground', './assets/stormtrooper_menu_scene.png')
     this.load.image('startButton', './assets/start.png')
     this.load.image('instructionsButton', './assets/instructionsButton.png')  
+
+    //load the audio
     this.load.audio('menu_music', './assets/menu_music.mp3')
   }
 
   create (data) {
- 
+
+     // play the looped background music
     this.menuSceneMusic = this.sound.add('menu_music')
     this.menuSceneMusic.loop = true
-    this.menuSceneMusic.play()
-  
+    this.menuSceneMusic.play()   
+
     // add the sprite for the menu background
     this.menuSceneBackground = this.add.sprite (
       0,
@@ -50,34 +55,40 @@ class MenuScene extends Phaser.Scene {
     this.menuSceneBackground.x = 1920 / 2
     this.menuSceneBackground.y = 1080 / 2
 
-    // add the sprite for the start button
+    // add the sprite for the start button and instructions button
     this.startButton = this.add.sprite(1920/2, (1080/2) - 50, "startButton") 
     this.instructionsButton = this.add.sprite(1920/2, (1080/2)+100, "instructionsButton") 
 
-    //make the start button interactive, and when clicked, call the clickButton() function
+    //make the start button interactive, and when clicked, call the clickStart() function
     this.startButton.setInteractive({ useHandCursor : true})
     this.startButton.on("pointerdown", () => this.clickStart())
 
+    //make the instructions button interactive, and when clicked, call the clickInstructions() function
     this.instructionsButton.setInteractive({ useHandCursor : true})
     this.instructionsButton.on("pointerdown", () => this.clickInstructions())
 
   }
 
   update (time, delta) {
-    // pass
-
   }
 
   clickStart() {
+    // start game scene
     this.scene.start("gameScene")
+
+    //pause the music
     this.menuSceneMusic.pause()
   }
 
   clickInstructions () {
+
+    // start the instructions scene
     this.scene.start("instructionsScene")
-        this.menuSceneMusic.pause()
+
+    //pause the music
+    this.menuSceneMusic.pause()
   }
 }
 
-// export the title scene
+// export the menu scene
 export default MenuScene

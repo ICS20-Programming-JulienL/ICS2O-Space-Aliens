@@ -10,7 +10,7 @@
 // extend the game scene into the phaser library
 class GameScene extends Phaser.Scene {
   
-  // create an enemy
+  // create an enemy in the function createEnemy()
   createEnemy () {
 
     // make the x location of the enemy a random number
@@ -24,8 +24,11 @@ class GameScene extends Phaser.Scene {
     const anEnemy = this.physics.add.sprite(enemyXLocation, -100, "enemy").setScale(0.35)
     anEnemy.body.velocity.y = 200
     anEnemy.body.velocity.x = enemyXVelocity
+
+    // connect to the enemy group
     this.enemyGroup.add(anEnemy)
   }
+  
   constructor () {
     super({ key: 'gameScene' })
 
@@ -36,22 +39,15 @@ class GameScene extends Phaser.Scene {
     // assign fireMissile to false
     this.fireMissile = false
 
+    // assign gameSceneMusic to null
+    this.gameSceneMusic = null
+    
     // assign the score to 0 and the score text to null
     this.score = 0
     this.scoreText = null
 
-    this.highScore = 0
-    this.highScoreText = null
-
-    this.highScoreTextStyle = { font: "65px Arial", fill: "#ffffff", align: "center" } 
     // assign the score text styling variable to the intended styling.
     this.scoreTextStyle = { font: "65px Arial", fill: "#ffffff", align: "center" } 
-
-    // assign gameOver text to null
-    this.gameOverText = null
-
-    //     // assign the game over text styling variable to the intended styling.
-    this.gameOverTextStyle = { font: "65px Arial", fill: "#000000", align: "center" } 
   }
 
   // initialize the background color
@@ -69,18 +65,20 @@ class GameScene extends Phaser.Scene {
     this.load.image("missile", "./assets/laser_beam1.png")
     this.load.image("enemy", "./assets/tie_fighter_enemy.png")
 
-    //load sound for game scene
-    this.load.audio("laser", "./assets/laser1.wav")
+    //load sound effects and music for game scene
+    this.load.audio("laser", "./assets/laser.mp3")
     this.load.audio("death_sound", "./assets/death_sound.mp3")
     this.load.audio("explosion", "./assets/barrelExploding.wav")
+    this.load.audio("game_music", "./assets/game_music.mp3")
 
   }
 
   create (data) {
 
-    this.menuSceneMusic = this.sound.add('menu_music')
-    this.menuSceneMusic.loop = true
-    this.menuSceneMusic.play()
+    // play the looped game scene music
+    this.gameSceneMusic = this.sound.add('game_music')
+    this.gameSceneMusic.loop = true
+    this.gameSceneMusic.play()
   
     // sprite for background
     this.gameSceneBackground = this.add.sprite (
@@ -93,9 +91,7 @@ class GameScene extends Phaser.Scene {
     this.gameSceneBackground.setOrigin(0, 0)
 
     // add the score text
-    this.scoreText = this.add.text(10, 10, "Score :" + this.score.toString(), this.scoreTextStyle)
-    this.highScoreText = this.add.text(10, 75, "High Score :" + this.highScore.toString(), this.highScoreTextStyle)
-    
+    this.scoreText = this.add.text(10, 10, "Score: " + this.score.toString(), this.scoreTextStyle)
     
     // sprite for ship
     this.ship = this.physics.add.sprite(1920/2, 1080-100, "ship")
@@ -114,10 +110,10 @@ class GameScene extends Phaser.Scene {
       enemyCollide.destroy()
       missileCollide.destroy()
 
-      // play the death and explosion sound effect
+      // play the explosion sound effect
       this.sound.play("explosion")
 
-      // add one point to the score
+      // add 5 points to the score
       this.score = this.score+5
       this.scoreText.setText("Score: " + this.score.toString())
 
@@ -134,35 +130,51 @@ class GameScene extends Phaser.Scene {
       // play the explosion and death sound effect
       this.sound.play("death_sound")
 
+      // start the lose scene
       this.scene.start("loseScene")
-       
+
+      // set missile fire to false
       this.missileFire == false
+
+      //pause game scene music 
+      this.gameSceneMusic.pause()
        
       // set the score back to zero
-    if (this.score >= this.highScore) {
-      this.highScore = this.score
-      this.highScoreText.setText("High Score: " + this.highScore.toString())
       this.score = 0
-    }
-    }.bind(this)) 
+    }.bind(this))
   }
 
   update (time, delta) {
     // called 60 times a second
 
+    // create an enemy every few seconds
     if (time % 9 == 0) {
       this.createEnemy()
     }
 
     // assign the right arrow key, left arrow key, A key, D key, and space bar to a respective variable.
-    
     const keyAObj = this.input.keyboard.addKey("A")
     const keyDObj = this.input.keyboard.addKey("D")    
     const keyLeftObj = this.input.keyboard.addKey("LEFT")
     const keyRightObj = this.input.keyboard.addKey("RIGHT")
     const keySpaceObj = this.input.keyboard.addKey("SPACE")
+    
+    // if the score is equal or greater than 55, then...
+    if (this.score >= 55) {
+      //pause game scene music 
+      this.gameSceneMusic.pause()
 
-    // if the left arrow key is pressed, move the ship 15 units to the left.
+      //switch the scene to win scene
+      this.scene.start("winScene")
+
+      // set the score to 0
+      this.score = 0
+
+      // set fire missile to false
+      this.missileFire == false
+    }
+
+      // if the left arrow key is pressed, move the ship 15 units to the left.
     if ((keyLeftObj.isDown === true) || (keyAObj.isDown === true)) {
       this.ship.x = this.ship.x -=15
 
@@ -171,13 +183,7 @@ class GameScene extends Phaser.Scene {
         this.ship.x = 1920
       }
     }
-
-    if (this.score >= 5) {
-      this.scene.start("winScene")
-      this.score = 0
-      this.missileFire == false
-    }
-
+    
     // if the right arrow key is pressed 
     if ((keyRightObj.isDown === true) || (keyDObj.isDown === true)) {
       this.ship.x = this.ship.x +=15
@@ -207,6 +213,7 @@ class GameScene extends Phaser.Scene {
       this.fireMissile = false
     }
 
+    // allow the the missiles to move up the screen
     this.missileGroup.children.each (function (item) {
       item.y = item.y -15 
       if (item.y < 0) {
@@ -216,5 +223,5 @@ class GameScene extends Phaser.Scene {
   }
 }
 
-// export the title scene
+// export the game scene
 export default GameScene
