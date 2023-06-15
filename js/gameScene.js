@@ -61,7 +61,7 @@ class GameScene extends Phaser.Scene {
 
     // images for game scene
     this.load.image("gameSceneBackground", "./assets/gameSceneBackground.jpg")
-    this.load.image("ship", "/assets/stormtrooper1.png")
+    this.load.image("ship", "/assets/stormtrooper.png")
     this.load.image("missile", "./assets/laser_beam1.png")
     this.load.image("enemy", "./assets/tie_fighter_enemy.png")
 
@@ -159,8 +159,8 @@ class GameScene extends Phaser.Scene {
     const keyRightObj = this.input.keyboard.addKey("RIGHT")
     const keySpaceObj = this.input.keyboard.addKey("SPACE")
     
-    // if the score is equal or greater than 55, then...
-    if (this.score >= 55) {
+    // if the score is equal or greater than 50, then...
+    if (this.score >= 50) {
       //pause game scene music 
       this.gameSceneMusic.pause()
 
