@@ -60,16 +60,16 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images for game scene
-    this.load.image("gameSceneBackground", "./assets/gameSceneBackground.jpg")
-    this.load.image("ship", "/assets/stormtrooper.png")
-    this.load.image("missile", "./assets/laser_beam1.png")
-    this.load.image("enemy", "./assets/tie_fighter_enemy.png")
+    this.load.image("gameSceneBackground", "./images/gameSceneBackground.jpg")
+    this.load.image("ship", "/images/stormtrooper.png")
+    this.load.image("missile", "./images/laser_beam1.png")
+    this.load.image("enemy", "./images/tie_fighter_enemy.png")
 
     //load sound effects and music for game scene
-    this.load.audio("laser", "./assets/laser.mp3")
-    this.load.audio("death_sound", "./assets/death_sound.mp3")
-    this.load.audio("explosion", "./assets/explosion.wav")
-    this.load.audio("game_music", "./assets/game_music.mp3")
+    this.load.audio("laser", "./sounds/laser.mp3")
+    this.load.audio("death_sound", "./sounds/death_sound.mp3")
+    this.load.audio("explosion", "./sounds/explosion.wav")
+    this.load.audio("game_music", "./sounds/game_music.mp3")
 
   }
 

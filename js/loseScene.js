@@ -37,12 +37,12 @@ class LoseScene extends Phaser.Scene {
     console.log('Win Scene')
 
     // load the images
-    this.load.image('loseSceneBackground', './assets/loseSceneBackground.jpg')
-    this.load.image('menuButton', './assets/menuButton.png')  
-    this.load.image('retryButton', './assets/retryButton.png')  
+    this.load.image('loseSceneBackground', './images/loseSceneBackground.jpg')
+    this.load.image('menuButton', './images/menuButton.png')  
+    this.load.image('retryButton', './images/retryButton.png')  
 
   //load the audio
-    this.load.audio('lose_music', './assets/lose_music.mp3')
+    this.load.audio('lose_music', './sounds/lose_music.mp3')
 
   }
 

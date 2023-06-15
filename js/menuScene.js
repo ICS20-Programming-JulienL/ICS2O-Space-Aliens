@@ -29,12 +29,12 @@ class MenuScene extends Phaser.Scene {
     console.log('Menu Scene')
 
     // load the images
-    this.load.image('menuSceneBackground', './assets/stormtrooper_menu_scene.png')
-    this.load.image('startButton', './assets/start.png')
-    this.load.image('instructionsButton', './assets/instructionsButton.png')  
+    this.load.image('menuSceneBackground', './images/stormtrooper_menu_scene.png')
+    this.load.image('startButton', './images/start.png')
+    this.load.image('instructionsButton', './images/instructionsButton.png')  
 
     //load the audio
-    this.load.audio('menu_music', './assets/menu_music.mp3')
+    this.load.audio('menu_music', './sounds/menu_music.mp3')
   }
 
   create (data) {

@@ -36,12 +36,12 @@ class WinScene extends Phaser.Scene {
     console.log('Win Scene')
 
     // load the images
-    this.load.image('winSceneBackground', './assets/winSceneBackground.jpg')
-    this.load.image('menuButton', './assets/menuButton.png')  
-    this.load.image('retryButton', './assets/retryButton.png')  
+    this.load.image('winSceneBackground', './images/winSceneBackground.jpg')
+    this.load.image('menuButton', './images/menuButton.png')  
+    this.load.image('retryButton', './images/retryButton.png')  
 
     //laod the audio
-    this.load.audio('win_music', './assets/win_music.mp3')
+    this.load.audio('win_music', './sounds/win_music.mp3')
 
   }
 

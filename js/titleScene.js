@@ -28,7 +28,7 @@ class TitleScene extends Phaser.Scene {
   // console log the title scene and load the image
   preload () {
     console.log('Title Scene')
-    this.load.image('titleSceneBackground', './assets/stormtrooper_splash_scene.PNG')
+    this.load.image('titleSceneBackground', './images/stormtrooper_splash_scene.PNG')
   }
 
   create (data) {
